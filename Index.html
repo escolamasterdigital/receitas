@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receitas Saudáveis para Viver Bem — Escolha Inteligente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ───────────────────────────────────────────
+       TOKENS
+    ─────────────────────────────────────────── */
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161c26;
+      --surface2:  #1e2736;
+      --emerald:   #2ecc8f;
+      --emerald-d: #1faa74;
+      --gold:      #e6b94a;
+      --gold-d:    #c8992e;
+      --text:      #f0f4f8;
+      --muted:     #8b9ab0;
+      --border:    rgba(255,255,255,0.07);
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    /* ───────────────────────────────────────────
+       RESET / BASE
+    ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ───────────────────────────────────────────
+       UTILITIES
+    ─────────────────────────────────────────── */
+    .container {
+      width: 90%;
+      max-width: 1060px;
+      margin-inline: auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--emerald);
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-d) 100%);
+      color: #0d1117;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2.4rem;
+      border-radius: 60px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      box-shadow: 0 4px 28px rgba(46,204,143,0.35);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(46,204,143,0.5);
+      filter: brightness(1.08);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      background: rgba(230,185,74,0.08);
+    }
+
+    /* ───────────────────────────────────────────
+       1. HERO / HEADER
+    ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 0 5rem;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at 50% 40%,
+        rgba(46,204,143,0.14) 0%,
+        rgba(230,185,74,0.06) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(46,204,143,0.1);
+      border: 1px solid rgba(46,204,143,0.25);
+      color: var(--emerald);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+      margin-bottom: 1.8rem;
+    }
+    .hero-eyebrow span { font-size: 1rem; }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--emerald) 30%, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2.4rem;
+    }
+
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-cta-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .hero-cta-note strong { color: var(--emerald); }
+
+    .hero-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.12;
+      font-size: 5rem;
+    }
+    .hero-deco-1 { top: 8%; left: 4%; transform: rotate(-20deg); }
+    .hero-deco-2 { top: 15%; right: 5%; transform: rotate(15deg); font-size: 3.5rem; }
+    .hero-deco-3 { bottom: 10%; left: 8%; transform: rotate(10deg); font-size: 3rem; }
+
+    /* ───────────────────────────────────────────
+       2. SOBRE O PRODUTO
+    ─────────────────────────────────────────── */
+    .sobre {
+      position: relative;
+      padding: 5rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .sobre-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .sobre h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .sobre h2 span { color: var(--emerald); }
+
+    .sobre p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 1.4rem;
+    }
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .pain-list li .icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(46,204,143,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--emerald);
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+
+    .sobre-right {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .sobre-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sobre-stat:last-child { border-bottom: none; }
+
+    .sobre-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--emerald);
+      line-height: 1;
+    }
+    .sobre-stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ───────────────────────────────────────────
+       3. BENEFÍCIOS
+    ─────────────────────────────────────────── */
+    .beneficios {
+      padding: 5rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .beneficios-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .beneficios-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      line-height: 1.2;
+    }
+    .beneficios-header p {
+      color: var(--muted);
+      margin-top: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover {
+      border-color: rgba(46,204,143,0.3);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .card-icon.green  { background: rgba(46,204,143,0.12); }
+    .card-icon.gold   { background: rgba(230,185,74,0.12); }
+    .card-icon.teal   { background: rgba(56,189,248,0.10); }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .card-list li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-list li::before {
+      content: '✓';
+      color: var(--emerald);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ───────────────────────────────────────────
+       4. PREÇO E OFERTA
+    ─────────────────────────────────────────── */
+    .preco {
+      padding: 5.5rem 0;
+      text-align: center;
+    }
+
+    .preco-box {
+      max-width: 620px;
+      margin-inline: auto;
+      background: var(--surface);
+      border: 1px solid rgba(46,204,143,0.25);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preco-box::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,204,143,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .preco-badge {
+      display: inline-block;
+      background: rgba(230,185,74,0.15);
+      border: 1px solid rgba(230,185,74,0.35);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 60px;
+      margin-bottom: 1.5rem;
+    }
+
+    .preco-box h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .preco-strike {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .preco-valor {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0.2rem;
+      margin: 0.4rem 0 0.3rem;
+      line-height: 1;
+    }
+    .preco-prefix {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--emerald);
+      padding-bottom: 0.35rem;
+    }
+    .preco-num {
+      font-family: var(--font-display);
+      font-size: 5.5rem;
+      font-weight: 900;
+      color: var(--emerald);
+    }
+    .preco-cents {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--emerald);
+      padding-bottom: 0.8rem;
+    }
+
+    .preco-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+
+    .preco-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .preco-feat {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .preco-feat span { color: var(--emerald); font-weight: 700; }
+
+    /* ───────────────────────────────────────────
+       5. CTA SECTION
+    ─────────────────────────────────────────── */
+    .cta-section {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .btn-primary.large {
+      font-size: 1.15rem;
+      padding: 1.2rem 3rem;
+      box-shadow: 0 6px 40px rgba(46,204,143,0.45);
+    }
+
+    .cta-secure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .cta-secure-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ───────────────────────────────────────────
+       SISTEMA DE POP-UP MODAL (EXIT INTENT)
+    ─────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #161c26 0%, #0f2318 100%);
+      border: 1px solid rgba(46,204,143,0.25);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      max-width: 550px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 2.2rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    .modal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(230,185,74,0.1);
+      border: 1px solid rgba(230,185,74,0.25);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 60px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .modal-list {
+      list-style: none;
+      text-align: left;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1.2rem 0 2rem;
+    }
+    .modal-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .modal-list li::before {
+      content: '🌿';
+      font-size: 0.85rem;
+    }
+
+    /* ───────────────────────────────────────────
+       FOOTER STATIC
+    ─────────────────────────────────────────── */
+    .footer-copy {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-copy a { color: var(--emerald); text-decoration: underline; }
+
+    /* ───────────────────────────────────────────
+       RESPONSIVO MOBILE (CORREÇÃO DE BOTÃO E TEXTO)
+    ─────────────────────────────────────────── */
+    @media (max-width: 820px) {
+      .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-inline: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero { padding: 4rem 0 3.5rem; }
+      .preco-num { font-size: 4rem; }
+      .preco-box { padding: 2rem 1.2rem; }
+      .modal-content { padding: 2.5rem 1.2rem; }
+      
+      .btn-primary, .btn-secondary { 
+        width: 100%; 
+        max-width: 100%; 
+        white-space: normal !important; 
+        text-align: center;
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+        line-height: 1.3;
+      }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--emerald);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ▓▓▓ 1. HERO ▓▓▓ -->
+<section class="hero">
+  <div class="hero-deco hero-deco-1">🥗</div>
+  <div class="hero-deco hero-deco-2">🥦</div>
+  <div class="hero-deco hero-deco-3">🍋</div>
+
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span>🌿</span> Alimentação limpa e descomplicada para o seu dia a dia
+    </div>
+
+    <h1>
+      Emagreça de Verdade —<br />
+      Sem Dietas Malucas<br />
+      e Sem Abrir Mão do <em>Sabor</em>
+    </h1>
+
+    <p class="hero-sub">
+      +100 receitas práticas e inteligentes reunidas em um guia digital completo. 
+      Comida de verdade feita com ingredientes fáceis de comprar ou que já tem em casa.
+    </p>
+
+    <div class="hero-cta-wrap">
+      <a href="https://pay.kiwify.com.br/jOyPMD1" class="btn-primary large" target="_blank" rel="noopener">
+        🛒 QUERO O GUIA COMPLETO POR APENAS R$ 14,90
+      </a>
+      <p class="hero-cta-note">
+        <strong>✅ Entrega automática</strong> &nbsp;•&nbsp; Download imediato no <span style="white-space: nowrap;">e-mail</span> ou <span style="white-space: nowrap;">WhatsApp</span> &nbsp;•&nbsp; 7 dias de garantia
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ▓▓▓ 2. SOBRE O PRODUTO ▓▓▓ -->
+<section class="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div>
+        <div class="sobre-tag">⚡ Chega de monotonia na dieta</div>
+        <h2>
+          Acabe de vez com a dúvida do<br />
+          <span>"o que comer para emagrecer"</span>
+        </h2>
+        <p>
+          O maior erro de quem tenta mudar os hábitos alimentares é cair na rotina do frango grelhado sem graça e da salada folhosa insossa. A falta de opções faz qualquer um desistir.
+        </p>
+        <p>
+          O livro digital <strong>Receitas Saudáveis para Viver Bem</strong> funciona como um mapa prático. São opções estruturadas para todas as refeições do seu dia, provando que dá para perder peso comendo pratos saborosos e fáceis de preparar.
+        </p>
+
+        <ul class="pain-list">
+          <li>
+            <div class="icon">✓</div>
+            <span>Variedade real: opções que vão de pratos principais a doces inteligentes</span>
+          </li>
+          <li>
+            <div class="icon">✓</div>
+            <span>Ingredientes acessíveis encontrados em qualquer mercado de bairro</span>
+          </li>
+          <li>
+            <div class="icon">✓</div>
+            <span>Foco em densidade de nutrientes e alto poder de saciedade</span>
+          </li>
+          <li>
+            <div class="icon">✓</div>
+            <span>Ideal para quem busca emagrecimento saudável e reeducação alimentar</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sobre-right">
+        <div class="sobre-stat">
+          <span class="sobre-stat-num">+100</span>
+          <span class="sobre-stat-label">Opções inteligentes e saborosas</span>
+        </div>
+        <div class="sobre-stat">
+          <span class="sobre-stat-num">5</span>
+          <span class="sobre-stat-label">Categorias completas --> Cafés, Almoços, Jantares, Doces e Sobremesas</span>
+        </div>
+        <div class="sobre-stat">
+          <span class="sobre-stat-num">100%</span>
+          <span class="sobre-stat-label">Digital --> Baixe no celular e consulte quando quiser</span>
+        </div>
+        <div class="sobre-stat">
+          <span class="sobre-stat-num">R$ 0,14</span>
+          <span class="sobre-stat-label">Custo por opção —-> Menos que o preço de uma bala por receita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▓▓▓ 3. BENEFÍCIOS ▓▓▓ -->
+<section class="beneficios">
+  <div class="container">
+    <div class="beneficios-header">
+      <span class="section-label">🏆 Os Três Pilares</span>
+      <h2>A combinação que garante a consistência</h2>
+      <p>Praticidade, sabor marcante e resultados duradouros sem passar perrengue.</p>
+    </div>
+
+    <div class="cards-grid">
+      <!-- CARD 1: PRATICIDADE -->
+      <div class="card">
+        <div class="card-icon green">⚡</div>
+        <h3>Praticidade</h3>
+        <p>Desenvolvido sob medida para quem trabalha, estuda e não quer gastar horas na cozinha.</p>
+        <ul class="card-list">
+          <li>Instruções de preparo direto ao ponto</li>
+          <li>Modo de preparo simples e limpo</li>
+          <li>Opções fáceis para a rotina diária</li>
+          <li>Estrutura focada em economia de tempo</li>
+        </ul>
+      </div>
+
+      <!-- CARD 2: SABOR -->
+      <div class="card">
+        <div class="card-icon gold">🍽️</div>
+        <h3>Sabor</h3>
+        <p>Dieta não é punição. Cada receita foi desenvolvida para você querer repetir.</p>
+        <ul class="card-list">
+          <li>Temperos aromáticos e ervas frescas</li>
+          <li>Sobremesas fit que parecem "proibidas"</li>
+          <li>Versões saudáveis dos clássicos favoritos</li>
+          <li>Lanches que tiram a fissura de açúcar</li>
+        </ul>
+      </div>
+
+      <!-- CARD 3: RESULTADOS -->
+      <div class="card">
+        <div class="card-icon teal">🌿</div>
+        <h3>Equilíbrio</h3>
+        <p>Foco total em reeducação alimentar duradoura, ajudando seu corpo de forma natural.</p>
+        <ul class="card-list">
+          <li>Opções leves para lanches e jantares</li>
+          <li>Alto teor de fibras para o intestino</li>
+          <li>Substituições inteligentes para alimentos inflamatórios</li>
+          <li>Foco na manutenção natural do peso ideal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▓▓▓ 4. PREÇO E OFERTA ▓▓▓ -->
+<section class="preco">
+  <div class="container">
+    <span class="section-label">💰 Valor de Lançamento</span>
+    <div class="preco-box">
+      <div class="preco-badge">🔥 Oportunidade Exclusiva</div>
+      <h2>Transforme sua saúde gastando<br />menos que o preço de um café</h2>
+
+      <p class="preco-strike">De R$ 47,00</p>
+
+      <div class="preco-valor">
+        <span class="preco-prefix">R$</span>
+        <span class="preco-num">14</span>
+        <span class="preco-cents">,90</span>
+      </div>
+
+      <p class="preco-desc">Pagamento único via PIX ou Cartão — Acesso vitalício sem mensalidades</p>
+
+      <div class="preco-features">
+        <div class="preco-feat"><span>✓</span> +100 ideias estruturadas</div>
+        <div class="preco-feat"><span>✓</span> Doces e sobremesas inclusos</div>
+        <div class="preco-feat"><span>✓</span> Envio imediato em PDF</div>
+        <div class="preco-feat"><span>✓</span> Garantia incondicional de 7 dias</div>
+        <div class="preco-feat"><span>✓</span> Sem taxas ou cobranças ocultas</div>
+      </div>
+
+      <a href="https://pay.kiwify.com.br/jOyPMD1" class="btn-primary large" target="_blank" rel="noopener">
+        🛒 QUERO O GUIA COMPLETO POR R$ 14,90
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ▓▓▓ 5. CTA DE COMPRA ▓▓▓ -->
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label">🚀 Decisão Inteligente</span>
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:0.6rem;">
+      O melhor momento para começar foi ontem. O segundo melhor é agora.
+    </h2>
+    <p style="color:var(--muted);max-width:550px;margin:0 auto 2rem;">
+      Não adie a sua reeducação alimentar para a próxima segunda-feira. Comece a mudar sua saúde e seu corpo com um clique.
+    </p>
+
+    <a href="https://pay.kiwify.com.br/jOyPMD1" class="btn-primary large" target="_blank" rel="noopener">
+      ✅ GARANTIR MINHAS +100 RECEITAS POR R$ 14,90
+    </a>
+
+    <div class="cta-secure">
+      <div class="cta-secure-item">🔒 Ambiente Seguro Kiwify</div>
+      <div class="cta-secure-item">📧 Link enviado na hora por e-mail</div>
+      <div class="cta-secure-item">↩️ 7 dias de garantia incondicional</div>
+    </div>
+  </div>
+</section>
+
+<!-- ▓▓▓ 6. ESTRUTURA DO POP-UP OCULTO (MODAL) ▓▓▓ -->
+<div id="exit-modal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="close-modal" class="modal-close" aria-label="Fechar">&times;</button>
+    <div class="modal-tag">🎁 Amostra Gratuita</div>
+    <h2>Espere! Não vá embora de mãos vazias...</h2>
+    <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+      Nós confiamos tanto na qualidade do nosso material que preparamos uma <strong>amostra digital gratuita com 10 receitas extraídas diretamente do guia principal</strong> para você testar na prática.
+    </p>
+
+    <ul class="modal-list">
+      <li>3 lanches e cafés práticos para o dia</li>
+      <li>4 almoços ou jantares de fácil preparo</li>
+      <li>3 doces inteligentes de colher e caneca</li>
+    </ul>
+
+    <!-- ⚠️ COLOQUE AQUI O SEU LINK DO DRIVE OU DROPBOX DO PDF DE 10 RECEITAS -->
+    <a href="SEU_LINK_DO_PDF_DE_10_RECEITAS_AQUI" class="btn-primary" style="box-shadow: 0 4px 20px rgba(46,204,143,0.3);" target="_blank" rel="noopener">
+      🌿 BAIXAR AMOSTRA GRÁTIS COM 10 RECEITAS
+    </a>
+    
+    <p style="margin-top:1.2rem;font-size:0.78rem;color:var(--muted);">
+      Download direto em PDF. Sem pegadinhas e 100% gratuito.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer-copy">
+  <div class="container">
+    <p>
+      © 2026 Receitas Saudáveis para Viver Bem &nbsp;|&nbsp;
+      Dúvidas? <a href="mailto:escolamasterdigital@gmail.com">escolamasterdigital@gmail.com</a> &nbsp;|&nbsp;
+      WhatsApp: <a href="https://wa.me/5548984702067" target="_blank" rel="noopener">(48) 98470-2067</a>
+    </p>
+    <p style="margin-top:0.4rem;">
+      Este produto é comercializado via Kiwify. O uso de sugestões alimentares não substitui o acompanhamento de profissionais de saúde licenciados.
+    </p>
+  </div>
+</footer>
+
+<!-- ▓▓▓ 🌟 LÓGICA JAVASCRIPT CORRIGIDA (SISTEMA ANTI-SAÍDA RADICAL) 🌟 ▓▓▓ -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('exit-modal');
+    const closeBtn = document.getElementById('close-modal');
+    
+    let modalTriggered = sessionStorage.getItem('exitModalShown') === 'true';
+
+    function showModal() {
+      if (sessionStorage.getItem('exitModalShown') === 'true') return;
+      modal.classList.add('show');
+      sessionStorage.setItem('exitModalShown', 'true');
+    }
+
+    if (!modalTriggered) {
+      // 💻 1. GATILHO DESKTOP: Mouse saindo da janela pelo topo
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY < 20) {
+          showModal();
+        }
+      });
+
+      // 📱 2. GATILHO INTERCEPTADOR DO BOTÃO VOLTAR (Mobile e Desktop)
+      // Injeta um estado artificial na pilha de histórico do navegador
+      history.pushState(null, null, location.href);
+      window.addEventListener('popstate', () => {
+        if (sessionStorage.getItem('exitModalShown') !== 'true') {
+          showModal();
+          // Re-injeta para garantir que se o usuário clicar de novo em voltar ele consiga sair da página
+          history.pushState(null, null, location.href);
+        }
+      });
+
+      // 📑 3. GATILHO DE MUDANÇA DE GUIA / PERDA DE FOCO (Abas de navegador)
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          showModal();
+        }
+      });
+    }
+
+    // Fechar no "X"
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+
+    // Fechar clicando fora do quadrado central (na área escura)
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
